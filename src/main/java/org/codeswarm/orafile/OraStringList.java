@@ -2,11 +2,11 @@ package org.codeswarm.orafile;
 
 import java.util.List;
 
-public class OraList implements OraParam {
+public class OraStringList implements OraParam {
 
     final List<String> list;
 
-    public OraList(List<String> list) {
+    public OraStringList(List<String> list) {
         if (list == null) {
             throw new NullPointerException();
         }
@@ -17,12 +17,16 @@ public class OraList implements OraParam {
         return null;
     }
 
-    public List<String> asList() {
+    public List<String> asStringList() {
         return list;
     }
 
-    public OraDict asDict() {
+    public OraNamedParamList asNamedParamList() {
         return null;
+    }
+
+    public void add(String string) {
+        list.add(string);
     }
 
     public String toString() {
@@ -32,7 +36,7 @@ public class OraList implements OraParam {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OraList that = (OraList) o;
+        OraStringList that = (OraStringList) o;
         return list.equals(that.list);
     }
 

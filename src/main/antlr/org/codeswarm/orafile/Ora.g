@@ -46,26 +46,26 @@ options {
 
 }
 
-file returns [OraDict dict]
-    : { $dict = new OraDict(); }
-      ( definition { $dict.add($definition.dict); } )*
+file returns [OraNamedParamList params]
+    : { $params = Ora.params(); }
+      ( definition { $params.add($definition.named_param); } )*
     ;
 
-definition returns [OraDict dict]
+definition returns [OraNamedParam named_param]
     : keyword EQUALS param
-      { $dict = new OraDict($keyword.string, $param.param); }
+      { $named_param = Ora.namedParam($keyword.string, $param.param); }
     ;
 
 param returns [OraParam param]
     : ( value { $param = Ora.string($value.string); }
-      | LEFT_PAREN value_list RIGHT_PAREN { $param = Ora.list($value_list.values); }
-      | definition_list { $param = $definition_list.dict; }
+      | LEFT_PAREN value_list RIGHT_PAREN { $param = $value_list.strings; }
+      | param_list { $param = $param_list.params; }
       )
     ;
 
-definition_list returns [OraDict dict]
-    : { $dict = new OraDict(); }
-      ( LEFT_PAREN definition RIGHT_PAREN { $dict.add($definition.dict); } )+
+param_list returns [OraNamedParamList params]
+    : { $params = Ora.params(); }
+      ( LEFT_PAREN definition RIGHT_PAREN { $params.add($definition.named_param); } )+
     ;
 
 unquoted_string returns [String string]
@@ -85,10 +85,10 @@ value returns [String string]
     | quoted_string { $string = $quoted_string.string; }
     ;
 
-value_list returns [List<String> values]
-    : { $values = new ArrayList<String>(); }
-      v1=value { $values.add($v1.string); }
-      ( COMMA v2=value { $values.add($v2.string); } )*
+value_list returns [OraStringList strings]
+    : { $strings = Ora.strings(); }
+      v1=value { $strings.add($v1.string); }
+      ( COMMA v2=value { $strings.add($v2.string); } )*
     ;
 
 fragment NETWORK_CHARACTER

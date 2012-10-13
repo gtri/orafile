@@ -6,8 +6,8 @@ public interface OraParam {
 
     String asString();
 
-    List<String> asList();
+    List<String> asStringList();
 
-    OraDict asDict();
+    OraNamedParamList asNamedParamList();
 
 }

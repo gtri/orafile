@@ -17,11 +17,11 @@ public class OraString implements OraParam {
         return string;
     }
 
-    public List<String> asList() {
+    public List<String> asStringList() {
         return null;
     }
 
-    public OraDict asDict() {
+    public OraNamedParamList asNamedParamList() {
         return null;
     }
 

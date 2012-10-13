@@ -27,6 +27,7 @@ public class OraNamedParamList implements OraParam {
                 list = new ArrayList<OraParam>();
                 map.put(name, list);
             }
+            list.add(namedParam.getParam());
         }
         list.add(namedParam);
     }
@@ -43,6 +44,10 @@ public class OraNamedParamList implements OraParam {
 
     public List<OraNamedParam> asList() {
         return list;
+    }
+
+    public List<OraParam> get(String name) {
+        return map.get(name.toUpperCase());
     }
 
     public String toString() {

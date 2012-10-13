@@ -18,7 +18,7 @@ public class OrafileTest {
 
         OraNamedParamList params = parse("");
 
-        assertEquals(params.asMap().size(), 0);
+        assertEquals(params.asList().size(), 0);
     }
 
     @Test
@@ -134,17 +134,15 @@ public class OrafileTest {
             asList(string("one"), string("two"), string("three"))));
     }
 
-    OraParam tns() throws Exception {
+    OraNamedParamList tns() throws Exception {
         return Orafile.parse(IOUtils.toString(getClass().getResourceAsStream("tnsnames.ora")));
     }
 
     @Test
     public void testTns1() throws Exception {
 
-        OraParam connection = tns().asNamedParamList().get("APPLE_v1.0").get(0);
-
-        Map<String, String> values = Orafile.findParamAttrs(
-            connection, "address", asList("host", "port", "sid")).get(0);
+        Map<String, String> values = tns().get("APPLE_v1.0").get(0)
+            .findParamAttrs("address", asList("host", "port", "sid")).get(0);
 
         assertEquals(values.get("host"), "db-apple-v1-0");
         assertEquals(values.get("port"), "1521");
@@ -154,10 +152,8 @@ public class OrafileTest {
     @Test
     public void testTns2() throws Exception {
 
-        OraParam connection = tns().asNamedParamList().get("apple_master").get(0);
-
-        Map<String, String> values = Orafile.findParamAttrs(
-            connection, "address", asList("host", "port", "sid")).get(0);
+        Map<String, String> values = tns().get("apple_master").get(0)
+            .findParamAttrs("address", asList("host", "port", "sid")).get(0);
 
         assertEquals(values.get("host"), "db-apple-master");
         assertEquals(values.get("port"), "1500");
@@ -167,10 +163,8 @@ public class OrafileTest {
     @Test
     public void testTns3() throws Exception {
 
-        OraParam connection = tns().asNamedParamList().get("BANANA_MASTER").get(0);
-
-        List<Map<String, String>> values = Orafile.findParamAttrs(
-            connection, "address", asList("host", "port", "sid"));
+        List<Map<String, String>> values = tns().get("BANANA_MASTER").get(0)
+            .findParamAttrs("address", asList("host", "port", "sid"));
 
         assertEquals(values.get(0).get("host"), "db-banana-master");
         assertEquals(values.get(0).get("port"), "1521");

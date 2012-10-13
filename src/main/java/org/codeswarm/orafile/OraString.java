@@ -1,8 +1,6 @@
 package org.codeswarm.orafile;
 
-import java.util.List;
-
-public class OraString implements OraParam {
+public class OraString extends OraParam {
 
     final String string;
 
@@ -15,14 +13,6 @@ public class OraString implements OraParam {
 
     public String asString() {
         return string;
-    }
-
-    public List<String> asStringList() {
-        return null;
-    }
-
-    public OraNamedParamList asNamedParamList() {
-        return null;
     }
 
     public String toString() {

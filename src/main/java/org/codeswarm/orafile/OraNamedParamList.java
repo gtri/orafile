@@ -2,7 +2,7 @@ package org.codeswarm.orafile;
 
 import java.util.*;
 
-public class OraNamedParamList implements OraParam {
+public class OraNamedParamList extends OraParam {
 
     final Map<String, List<OraParam>> map = new HashMap<String, List<OraParam>>();
     final List<OraNamedParam> list = new ArrayList<OraNamedParam>();
@@ -35,12 +35,8 @@ public class OraNamedParamList implements OraParam {
         }
     }
 
-    public Map<String, List<OraParam>> asMap() {
-        return map;
-    }
-
     public List<OraNamedParam> asList() {
-        return list;
+        return Collections.unmodifiableList(list);
     }
 
     public List<OraParam> get(String name) {
@@ -78,14 +74,6 @@ public class OraNamedParamList implements OraParam {
 
     public int hashCode() {
         return list.hashCode();
-    }
-
-    public String asString() {
-        return null;
-    }
-
-    public List<String> asStringList() {
-        return null;
     }
 
     public OraNamedParamList asNamedParamList() {

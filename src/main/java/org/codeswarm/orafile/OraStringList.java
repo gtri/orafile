@@ -2,7 +2,7 @@ package org.codeswarm.orafile;
 
 import java.util.List;
 
-public class OraStringList implements OraParam {
+public class OraStringList extends OraParam {
 
     final List<String> list;
 
@@ -13,16 +13,8 @@ public class OraStringList implements OraParam {
         this.list = list;
     }
 
-    public String asString() {
-        return null;
-    }
-
     public List<String> asStringList() {
         return list;
-    }
-
-    public OraNamedParamList asNamedParamList() {
-        return null;
     }
 
     public void add(String string) {

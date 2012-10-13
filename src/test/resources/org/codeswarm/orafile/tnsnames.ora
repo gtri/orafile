@@ -1,0 +1,64 @@
+# tnsnames.ora
+# Oracle connection aliases conguration file.
+
+#########
+# Apple #
+#########
+
+APPLE_MASTER =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = db-apple-master)(PORT = 1500))
+    (CONNECT_DATA = (SID = grape) (SERVER = DEDICATED))
+  )
+
+APPLE_v1.0 =
+  (DESCRIPTION =
+    (ADDRESS_LIST =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = db-apple-v1-0)(PORT = 1521))
+    )
+    (CONNECT_DATA =
+      (SID = apple)
+      (SERVER = DEDICATED))  )
+
+APPLE_V1.1 =
+  (DESCRIPTION =
+    (ADDRESS_LIST =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = db-apple-v1-1)(PORT = 1521))
+    )
+    (CONNECT_DATA =
+      (SID = apple)
+      (SERVER = DEDICATED)
+    )
+  )
+
+##########
+# Banana #
+##########
+
+BANANA_MASTER =
+  (DESCRIPTION_LIST =
+    (DESCRIPTION =
+      (ADDRESS_LIST =
+        (ADDRESS = (PROTOCOL = TCP)(HOST = db-banana-master)(PORT = 1521))
+        (ADDRESS = (PROTOCOL = TCP)(HOST = db-banana-master)(PORT = 1522))
+      )
+      (CONNECT_DATA =(SID = banana)(SERVER = dedicated))
+    )
+    (DESCRIPTION =
+      (ADDRESS_LIST =
+        (ADDRESS = (PROTOCOL = TCP)(HOST = db-banana-master-2)(PORT = 1522))
+      )
+      (CONNECT_DATA = (SID = banana2))
+    )
+  )
+
+BANANA_MASTER_testing =
+  (DESCRIPTION =
+    (ADDRESS_LIST =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = db-banana-master-testing)(PORT = 1521))
+    )
+    (CONNECT_DATA =
+      (SID = kumquat)
+      (SERVER = DEDICATED)
+    )
+  )

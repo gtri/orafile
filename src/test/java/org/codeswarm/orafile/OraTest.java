@@ -1,9 +1,11 @@
 package org.codeswarm.orafile;
 
+import org.apache.commons.io.IOUtils;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.Arrays.asList;
 import static org.codeswarm.orafile.Ora.*;
@@ -130,6 +132,57 @@ public class OraTest {
 
         assertEquals(address, new ArrayList<OraParam>(
             asList(string("one"), string("two"), string("three"))));
+    }
+
+    OraParam tns() throws Exception {
+        return Ora.parse(IOUtils.toString(getClass().getResourceAsStream("tnsnames.ora")));
+    }
+
+    @Test
+    public void testTns1() throws Exception {
+
+        OraParam connection = tns().asNamedParamList().get("APPLE_v1.0").get(0);
+
+        Map<String, String> values = Ora.findParamAttrs(
+            connection, "address", asList("host", "port", "sid")).get(0);
+
+        assertEquals(values.get("host"), "db-apple-v1-0");
+        assertEquals(values.get("port"), "1521");
+        assertEquals(values.get("sid"), "apple");
+    }
+
+    @Test
+    public void testTns2() throws Exception {
+
+        OraParam connection = tns().asNamedParamList().get("apple_master").get(0);
+
+        Map<String, String> values = Ora.findParamAttrs(
+            connection, "address", asList("host", "port", "sid")).get(0);
+
+        assertEquals(values.get("host"), "db-apple-master");
+        assertEquals(values.get("port"), "1500");
+        assertEquals(values.get("sid"), "grape");
+    }
+
+    @Test
+    public void testTns3() throws Exception {
+
+        OraParam connection = tns().asNamedParamList().get("BANANA_MASTER").get(0);
+
+        List<Map<String, String>> values = Ora.findParamAttrs(
+            connection, "address", asList("host", "port", "sid"));
+
+        assertEquals(values.get(0).get("host"), "db-banana-master");
+        assertEquals(values.get(0).get("port"), "1521");
+        assertEquals(values.get(0).get("sid"), "banana");
+
+        assertEquals(values.get(1).get("host"), "db-banana-master");
+        assertEquals(values.get(1).get("port"), "1522");
+        assertEquals(values.get(1).get("sid"), "banana");
+
+        assertEquals(values.get(2).get("host"), "db-banana-master-2");
+        assertEquals(values.get(2).get("port"), "1522");
+        assertEquals(values.get(2).get("sid"), "banana2");
     }
 
 }

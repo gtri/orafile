@@ -1,9 +1,6 @@
 package org.codeswarm.orafile;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class OraNamedParamList implements OraParam {
 
@@ -47,7 +44,12 @@ public class OraNamedParamList implements OraParam {
     }
 
     public List<OraParam> get(String name) {
-        return map.get(name.toUpperCase());
+        List<OraParam> params = map.get(name.toUpperCase());
+        if (params != null) {
+            return params;
+        } else {
+            return Arrays.asList(new OraParam[]{});
+        }
     }
 
     public String toString() {

@@ -46,26 +46,26 @@ options {
 
 }
 
-file returns [OraDict params]
-    : { $params = Orafile.params(); }
-      ( definition { $params.add($definition.named_param); } )*
+file returns [OrafileDict dict]
+    : { $dict = Orafile.dict(); }
+      ( def { $dict.add($def.def); } )*
     ;
 
-definition returns [OraNamedParam named_param]
-    : keyword EQUALS param
-      { $named_param = Orafile.namedParam($keyword.string, $param.param); }
+def returns [OrafileDef def]
+    : keyword EQUALS val
+      { $def = Orafile.def($keyword.string, $val.val); }
     ;
 
-param returns [OraParam param]
-    : ( value { $param = Orafile.string($value.string); }
-      | LEFT_PAREN value_list RIGHT_PAREN { $param = $value_list.strings; }
-      | param_list { $param = $param_list.params; }
+val returns [OrafileVal val]
+    : ( str { $val = Orafile.string($str.string); }
+      | LEFT_PAREN str_list RIGHT_PAREN { $val = $str_list.strings; }
+      | def_list { $val = $def_list.dict; }
       )
     ;
 
-param_list returns [OraDict params]
-    : { $params = Orafile.params(); }
-      ( LEFT_PAREN definition RIGHT_PAREN { $params.add($definition.named_param); } )+
+def_list returns [OrafileDict dict]
+    : { $dict = Orafile.dict(); }
+      ( LEFT_PAREN def RIGHT_PAREN { $dict.add($def.def); } )+
     ;
 
 unquoted_string returns [String string]
@@ -80,15 +80,15 @@ keyword returns [String string]
     : unquoted_string { $string = $unquoted_string.string.toUpperCase(); }
     ;
 
-value returns [String string]
+str returns [String string]
     : unquoted_string { $string = $unquoted_string.string; }
     | quoted_string { $string = $quoted_string.string; }
     ;
 
-value_list returns [OraStringList strings]
+str_list returns [OrafileStringList strings]
     : { $strings = Orafile.strings(); }
-      v1=value { $strings.add($v1.string); }
-      ( COMMA v2=value { $strings.add($v2.string); } )*
+      v1=str { $strings.add($v1.string); }
+      ( COMMA v2=str { $strings.add($v2.string); } )*
     ;
 
 fragment NETWORK_CHARACTER

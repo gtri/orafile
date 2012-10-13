@@ -2,11 +2,11 @@ package org.codeswarm.orafile;
 
 import java.util.List;
 
-public class OraStringList extends OraParam {
+public class OrafileStringList extends OrafileVal {
 
     final List<String> list;
 
-    public OraStringList(List<String> list) {
+    public OrafileStringList(List<String> list) {
         if (list == null) {
             throw new NullPointerException();
         }
@@ -28,7 +28,7 @@ public class OraStringList extends OraParam {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OraStringList that = (OraStringList) o;
+        OrafileStringList that = (OrafileStringList) o;
         return list.equals(that.list);
     }
 

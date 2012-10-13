@@ -1,10 +1,10 @@
 package org.codeswarm.orafile;
 
-public class OraString extends OraParam {
+public class OrafileString extends OrafileVal {
 
     final String string;
 
-    public OraString(String string) {
+    public OrafileString(String string) {
         if (string == null) {
             throw new NullPointerException();
         }
@@ -23,7 +23,7 @@ public class OraString extends OraParam {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OraString that = (OraString) o;
+        OrafileString that = (OrafileString) o;
         return string.equals(that.string);
     }
 

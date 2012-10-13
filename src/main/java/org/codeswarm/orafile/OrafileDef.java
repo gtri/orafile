@@ -1,12 +1,12 @@
 package org.codeswarm.orafile;
 
-public class OraNamedParam {
+public class OrafileDef {
 
     private final String name;
 
-    private final OraParam param;
+    private final OrafileVal param;
 
-    public OraNamedParam(String name, OraParam param) {
+    public OrafileDef(String name, OrafileVal param) {
         if (name == null) {
             throw new NullPointerException();
         }
@@ -21,7 +21,7 @@ public class OraNamedParam {
         return name;
     }
 
-    public OraParam getParam() {
+    public OrafileVal getParam() {
         return param;
     }
 
@@ -33,7 +33,7 @@ public class OraNamedParam {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OraNamedParam that = (OraNamedParam) o;
+        OrafileDef that = (OrafileDef) o;
         return name.equals(that.name) && param.equals(that.param);
     }
 

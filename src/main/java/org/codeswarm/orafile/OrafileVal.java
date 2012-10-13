@@ -4,45 +4,45 @@ import java.util.*;
 
 import static java.util.Arrays.asList;
 
-public abstract class OraParam {
+public abstract class OrafileVal {
 
-    OraParam() { }
+    OrafileVal() { }
 
     /**
-     * {@code null} unless this is an instance of {@link OraString}.
+     * {@code null} unless this is an instance of {@link OrafileString}.
      */
     public String asString() {
         return null;
     }
 
     /**
-     * {@code null} unless this is an instance of {@link OraStringList}.
+     * {@code null} unless this is an instance of {@link OrafileStringList}.
      */
     public List<String> asStringList() {
         return null;
     }
 
     /**
-     * {@code null} unless this is an instance of {@link OraDict}.
+     * {@code null} unless this is an instance of {@link OrafileDict}.
      */
-    public OraDict asNamedParamList() {
+    public OrafileDict asNamedParamList() {
         return null;
     }
 
-    public List<List<OraParam>> findContextually(String keyword) {
+    public List<List<OrafileVal>> findContextually(String keyword) {
 
-        ArrayDeque<OraParam> stack = new ArrayDeque<OraParam>();
+        ArrayDeque<OrafileVal> stack = new ArrayDeque<OrafileVal>();
         stack.push(this);
         return findContextually(keyword, stack);
     }
 
-    static List<List<OraParam>> findContextually(String keyword, Deque<OraParam> stack) {
+    static List<List<OrafileVal>> findContextually(String keyword, Deque<OrafileVal> stack) {
 
-        List<List<OraParam>> retval = new ArrayList<List<OraParam>>();
-        for (OraNamedParam namedParam : stack.peek().getNamedParams()) {
-            OraParam param = namedParam.getParam();
-            if (namedParam.getName().equalsIgnoreCase(keyword)) {
-                ArrayList<OraParam> path = new ArrayList<OraParam>();
+        List<List<OrafileVal>> retval = new ArrayList<List<OrafileVal>>();
+        for (OrafileDef def : stack.peek().getNamedParams()) {
+            OrafileVal param = def.getParam();
+            if (def.getName().equalsIgnoreCase(keyword)) {
+                ArrayList<OrafileVal> path = new ArrayList<OrafileVal>();
                 path.add(param);
                 path.addAll(stack);
                 retval.add(path);
@@ -55,12 +55,12 @@ public abstract class OraParam {
         return retval;
     }
 
-    public List<OraParam> find(String keyword) {
+    public List<OrafileVal> find(String keyword) {
 
-        List<OraParam> retval = new ArrayList<OraParam>();
-        for (OraNamedParam namedParam : getNamedParams()) {
-            OraParam param = namedParam.getParam();
-            if (namedParam.getName().equalsIgnoreCase(keyword)) {
+        List<OrafileVal> retval = new ArrayList<OrafileVal>();
+        for (OrafileDef def : getNamedParams()) {
+            OrafileVal param = def.getParam();
+            if (def.getName().equalsIgnoreCase(keyword)) {
                 retval.add(param);
             } else {
                 retval.addAll(param.find(keyword));
@@ -71,7 +71,7 @@ public abstract class OraParam {
 
     public String findOneString(String keyword) {
 
-        for (OraParam param : find(keyword)) {
+        for (OrafileVal param : find(keyword)) {
             String value = param.asString();
             if (value != null) {
                 return value;
@@ -80,23 +80,23 @@ public abstract class OraParam {
         return null;
     }
 
-    public List<OraParam> get(String name) {
+    public List<OrafileVal> get(String name) {
 
-        OraDict dict = asNamedParamList();
+        OrafileDict dict = asNamedParamList();
         if (dict != null) {
             return dict.get(name);
         } else {
-            return asList(new OraParam[]{});
+            return asList(new OrafileVal[]{});
         }
     }
 
-    public List<OraNamedParam> getNamedParams() {
+    public List<OrafileDef> getNamedParams() {
 
-        OraDict dict = asNamedParamList();
+        OrafileDict dict = asNamedParamList();
         if (dict != null) {
             return dict.asList();
         } else {
-            return asList(new OraNamedParam[]{});
+            return asList(new OrafileDef[]{});
         }
     }
 
@@ -105,10 +105,10 @@ public abstract class OraParam {
 
         List<Map<String, String>> results = new ArrayList<Map<String, String>>();
 
-        paths: for (List<OraParam> path : findContextually(keyword)) {
+        paths: for (List<OrafileVal> path : findContextually(keyword)) {
             Map<String, String> values = new HashMap<String, String>();
             Set<String> attrsRemaining = new HashSet<String>(attrs);
-            for (OraParam param : path) {
+            for (OrafileVal param : path) {
                 for (String attr : attrsRemaining) {
                     String value = param.findOneString(attr);
                     if (value != null) {

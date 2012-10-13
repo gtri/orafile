@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Map;
 
 import static java.util.Arrays.asList;
-import static org.codeswarm.orafile.Ora.*;
+import static org.codeswarm.orafile.Orafile.*;
 import static org.testng.Assert.assertEquals;
 
-public class OraTest {
+public class OrafileTest {
 
     @Test
     public void testEmptyString() throws Exception {
@@ -135,7 +135,7 @@ public class OraTest {
     }
 
     OraParam tns() throws Exception {
-        return Ora.parse(IOUtils.toString(getClass().getResourceAsStream("tnsnames.ora")));
+        return Orafile.parse(IOUtils.toString(getClass().getResourceAsStream("tnsnames.ora")));
     }
 
     @Test
@@ -143,7 +143,7 @@ public class OraTest {
 
         OraParam connection = tns().asNamedParamList().get("APPLE_v1.0").get(0);
 
-        Map<String, String> values = Ora.findParamAttrs(
+        Map<String, String> values = Orafile.findParamAttrs(
             connection, "address", asList("host", "port", "sid")).get(0);
 
         assertEquals(values.get("host"), "db-apple-v1-0");
@@ -156,7 +156,7 @@ public class OraTest {
 
         OraParam connection = tns().asNamedParamList().get("apple_master").get(0);
 
-        Map<String, String> values = Ora.findParamAttrs(
+        Map<String, String> values = Orafile.findParamAttrs(
             connection, "address", asList("host", "port", "sid")).get(0);
 
         assertEquals(values.get("host"), "db-apple-master");
@@ -169,7 +169,7 @@ public class OraTest {
 
         OraParam connection = tns().asNamedParamList().get("BANANA_MASTER").get(0);
 
-        List<Map<String, String>> values = Ora.findParamAttrs(
+        List<Map<String, String>> values = Orafile.findParamAttrs(
             connection, "address", asList("host", "port", "sid"));
 
         assertEquals(values.get(0).get("host"), "db-banana-master");

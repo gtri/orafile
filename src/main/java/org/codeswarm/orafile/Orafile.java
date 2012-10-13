@@ -8,9 +8,9 @@ import java.util.*;
 
 import static java.util.Arrays.asList;
 
-public final class Ora {
+public final class Orafile {
 
-    private Ora() { }
+    private Orafile() { }
 
     public static OraNamedParamList params() {
         return new OraNamedParamList();

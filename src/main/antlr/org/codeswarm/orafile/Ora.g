@@ -47,24 +47,24 @@ options {
 }
 
 file returns [OraNamedParamList params]
-    : { $params = Ora.params(); }
+    : { $params = Orafile.params(); }
       ( definition { $params.add($definition.named_param); } )*
     ;
 
 definition returns [OraNamedParam named_param]
     : keyword EQUALS param
-      { $named_param = Ora.namedParam($keyword.string, $param.param); }
+      { $named_param = Orafile.namedParam($keyword.string, $param.param); }
     ;
 
 param returns [OraParam param]
-    : ( value { $param = Ora.string($value.string); }
+    : ( value { $param = Orafile.string($value.string); }
       | LEFT_PAREN value_list RIGHT_PAREN { $param = $value_list.strings; }
       | param_list { $param = $param_list.params; }
       )
     ;
 
 param_list returns [OraNamedParamList params]
-    : { $params = Ora.params(); }
+    : { $params = Orafile.params(); }
       ( LEFT_PAREN definition RIGHT_PAREN { $params.add($definition.named_param); } )+
     ;
 
@@ -86,7 +86,7 @@ value returns [String string]
     ;
 
 value_list returns [OraStringList strings]
-    : { $strings = Ora.strings(); }
+    : { $strings = Orafile.strings(); }
       v1=value { $strings.add($v1.string); }
       ( COMMA v2=value { $strings.add($v2.string); } )*
     ;

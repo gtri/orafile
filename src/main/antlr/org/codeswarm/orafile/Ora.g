@@ -46,7 +46,7 @@ options {
 
 }
 
-file returns [OraNamedParamList params]
+file returns [OraDict params]
     : { $params = Orafile.params(); }
       ( definition { $params.add($definition.named_param); } )*
     ;
@@ -63,7 +63,7 @@ param returns [OraParam param]
       )
     ;
 
-param_list returns [OraNamedParamList params]
+param_list returns [OraDict params]
     : { $params = Orafile.params(); }
       ( LEFT_PAREN definition RIGHT_PAREN { $params.add($definition.named_param); } )+
     ;

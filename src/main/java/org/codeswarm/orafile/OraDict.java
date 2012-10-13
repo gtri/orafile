@@ -2,14 +2,14 @@ package org.codeswarm.orafile;
 
 import java.util.*;
 
-public class OraNamedParamList extends OraParam {
+public class OraDict extends OraParam {
 
     final Map<String, List<OraParam>> map = new HashMap<String, List<OraParam>>();
     final List<OraNamedParam> list = new ArrayList<OraNamedParam>();
 
-    public OraNamedParamList() {}
+    public OraDict() {}
 
-    public OraNamedParamList(OraNamedParam namedParam) {
+    public OraDict(OraNamedParam namedParam) {
         if (namedParam == null) {
             throw new NullPointerException();
         }
@@ -29,8 +29,8 @@ public class OraNamedParamList extends OraParam {
         list.add(namedParam);
     }
 
-    public void add(OraNamedParamList namedParamList) {
-        for (OraNamedParam namedParam : namedParamList.list) {
+    public void add(OraDict dict) {
+        for (OraNamedParam namedParam : dict.list) {
             add(namedParam);
         }
     }
@@ -68,7 +68,7 @@ public class OraNamedParamList extends OraParam {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OraNamedParamList that = (OraNamedParamList) o;
+        OraDict that = (OraDict) o;
         return list.equals(that.list);
     }
 
@@ -76,7 +76,7 @@ public class OraNamedParamList extends OraParam {
         return list.hashCode();
     }
 
-    public OraNamedParamList asNamedParamList() {
+    public OraDict asNamedParamList() {
         return this;
     }
 

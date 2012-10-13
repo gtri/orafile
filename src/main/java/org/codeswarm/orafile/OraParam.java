@@ -23,9 +23,9 @@ public abstract class OraParam {
     }
 
     /**
-     * {@code null} unless this is an instance of {@link OraNamedParamList}.
+     * {@code null} unless this is an instance of {@link OraDict}.
      */
-    public OraNamedParamList asNamedParamList() {
+    public OraDict asNamedParamList() {
         return null;
     }
 
@@ -82,9 +82,9 @@ public abstract class OraParam {
 
     public List<OraParam> get(String name) {
 
-        OraNamedParamList namedParamList = asNamedParamList();
-        if (namedParamList != null) {
-            return namedParamList.get(name);
+        OraDict dict = asNamedParamList();
+        if (dict != null) {
+            return dict.get(name);
         } else {
             return asList(new OraParam[]{});
         }
@@ -92,9 +92,9 @@ public abstract class OraParam {
 
     public List<OraNamedParam> getNamedParams() {
 
-        OraNamedParamList namedParamList = asNamedParamList();
-        if (namedParamList != null) {
-            return namedParamList.asList();
+        OraDict dict = asNamedParamList();
+        if (dict != null) {
+            return dict.asList();
         } else {
             return asList(new OraNamedParam[]{});
         }

@@ -13,32 +13,32 @@ public final class Orafile {
 
     private Orafile() { }
 
-    public static OraNamedParamList params() {
-        return new OraNamedParamList();
+    public static OraDict params() {
+        return new OraDict();
     }
 
-    public static OraNamedParamList params(OraNamedParamList... namedParamLists) {
+    public static OraDict params(OraDict... dicts) {
 
-        OraNamedParamList retval = params();
-        for (OraNamedParamList namedParamList : namedParamLists) {
-            retval.add(namedParamList);
+        OraDict retval = params();
+        for (OraDict dict : dicts) {
+            retval.add(dict);
         }
         return retval;
     }
 
-    public static OraNamedParamList params(OraNamedParam namedParam) {
-        return new OraNamedParamList(namedParam);
+    public static OraDict params(OraNamedParam namedParam) {
+        return new OraDict(namedParam);
     }
 
-    public static OraNamedParamList params(String key, OraParam value) {
-        return new OraNamedParamList(namedParam(key, value));
+    public static OraDict params(String key, OraParam value) {
+        return new OraDict(namedParam(key, value));
     }
 
-    public static OraNamedParamList params(String key, String value) {
+    public static OraDict params(String key, String value) {
         return params(key, string(value));
     }
 
-    public static OraNamedParamList params(String key, List<String> value) {
+    public static OraDict params(String key, List<String> value) {
         return params(key, strings(value));
     }
 
@@ -58,7 +58,7 @@ public final class Orafile {
         return new OraNamedParam(name, param);
     }
 
-    public static OraNamedParamList parse(String fileContent) throws RecognitionException {
+    public static OraDict parse(String fileContent) throws RecognitionException {
 
         ANTLRStringStream stringStream = new ANTLRStringStream(fileContent);
         org.codeswarm.orafile.OraLexer lexer = new OraLexer(stringStream);

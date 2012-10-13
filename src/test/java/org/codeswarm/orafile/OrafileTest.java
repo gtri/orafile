@@ -16,7 +16,7 @@ public class OrafileTest {
     @Test
     public void testEmptyString() throws Exception {
 
-        OraNamedParamList params = parse("");
+        OraDict params = parse("");
 
         assertEquals(params.asList().size(), 0);
     }
@@ -24,7 +24,7 @@ public class OrafileTest {
     @Test
     public void testStringValue() throws Exception {
 
-        OraNamedParamList params = parse("A=B");
+        OraDict params = parse("A=B");
 
         assertEquals(params, params("A", "B"));
     }
@@ -32,7 +32,7 @@ public class OrafileTest {
     @Test
     public void testListValue() throws Exception {
 
-        OraNamedParamList params = parse("ABC=(XY, YZ)");
+        OraDict params = parse("ABC=(XY, YZ)");
 
         assertEquals(params, params("ABC", asList("XY", "YZ")));
     }
@@ -40,12 +40,12 @@ public class OrafileTest {
     @Test
     public void testTwoStringValues() throws Exception {
 
-        OraNamedParamList params = parse("ONE = X TWO = Y");
+        OraDict params = parse("ONE = X TWO = Y");
 
         assertEquals(params, params(params("ONE", "X"), params("TWO", "Y")));
     }
 
-    OraNamedParamList typicalTnsEntry() {
+    OraDict typicalTnsEntry() {
 
         return params("APPLE_MASTER", params(
             "DESCRIPTION", params(
@@ -62,7 +62,7 @@ public class OrafileTest {
     @Test
     public void testTypicalTnsEntry() throws Exception {
 
-        OraNamedParamList params = parse("APPLE_MASTER =\n" +
+        OraDict params = parse("APPLE_MASTER =\n" +
             "  (DESCRIPTION =\n" +
             "    (ADDRESS_LIST =\n" +
             "      (ADDRESS = (PROTOCOL = TCP)(HOST = db-apple-master)(PORT = 1521))\n" +
@@ -79,7 +79,7 @@ public class OrafileTest {
     @Test
     public void testTypicalTnsEntryDense() throws Exception {
 
-        OraNamedParamList params = parse("APPLE_MASTER=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)" +
+        OraDict params = parse("APPLE_MASTER=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)" +
             "(HOST=db-apple-master)(PORT=1521)))(CONNECT_DATA=(SID=apple)(SERVER=DEDICATED)))");
 
         assertEquals(params, typicalTnsEntry());
@@ -88,7 +88,7 @@ public class OrafileTest {
     @Test
     public void testList() throws Exception {
 
-        OraNamedParamList params = parse("NAMES.DIRECTORY_PATH= (LDAP, TNSNAMES, HOSTNAME)");
+        OraDict params = parse("NAMES.DIRECTORY_PATH= (LDAP, TNSNAMES, HOSTNAME)");
 
         assertEquals(params, params("NAMES.DIRECTORY_PATH", strings("LDAP", "TNSNAMES", "HOSTNAME")));
     }
@@ -96,7 +96,7 @@ public class OrafileTest {
     @Test
     public void testEscape() throws Exception {
 
-        OraNamedParamList params = parse("BANANA\\#MASTER = " +
+        OraDict params = parse("BANANA\\#MASTER = " +
             "(A='ba\\'na\\'na')" +
             "(B=\\ \\ q)" +
             "(C= \"one \\\"two\\\" three\"))" +
@@ -112,7 +112,7 @@ public class OrafileTest {
     @Test
     public void testMultipleAddresses() throws Exception {
 
-        OraNamedParamList params = parse("net_service_name=\n" +
+        OraDict params = parse("net_service_name=\n" +
             "     (DESCRIPTION=\n" +
             "      (ADDRESS=one)\n" +
             "      (ADDRESS=two)\n" +
@@ -134,7 +134,7 @@ public class OrafileTest {
             asList(string("one"), string("two"), string("three"))));
     }
 
-    OraNamedParamList tns() throws Exception {
+    OraDict tns() throws Exception {
         return Orafile.parse(IOUtils.toString(getClass().getResourceAsStream("tnsnames.ora")));
     }
 

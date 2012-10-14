@@ -1,12 +1,3 @@
-orafile
-=======
-
-Java for dealing with Oracle SQL*Net .ora files
-
-Example usage
--------------
-
-```java
 import org.codeswarm.orafile.*;
 import java.util.*;
 
@@ -54,4 +45,3 @@ public class OrafileDemo {
     }
 
 }
-```

@@ -19,7 +19,7 @@ valid since ',' is not listed as a delimiter.
 
 */
 
-grammar Ora;
+grammar Orafile;
 
 options {
     k = 5;

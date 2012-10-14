@@ -69,9 +69,9 @@ public final class Orafile {
     public static OrafileDict parse(String fileContent) throws RecognitionException {
 
         ANTLRStringStream stringStream = new ANTLRStringStream(fileContent);
-        org.codeswarm.orafile.OraLexer lexer = new OraLexer(stringStream);
+        OrafileLexer lexer = new OrafileLexer(stringStream);
         TokenRewriteStream tokens = new TokenRewriteStream(lexer);
-        OraParser parser = new OraParser(tokens);
+        OrafileParser parser = new OrafileParser(tokens);
         return parser.file().dict;
     }
 

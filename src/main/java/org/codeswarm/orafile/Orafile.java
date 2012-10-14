@@ -9,6 +9,14 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
+/**
+ * Utility class for dealing with ora files.
+ *
+ * <p>The important method is {@link #parse(String)}.</p>
+ *
+ * <p>Contains constructor methods for {@link OrafileDef},
+ * {@link OrafileDict}, {@link OrafileString}, {@link OrafileStringList}.</p>
+ */
 public final class Orafile {
 
     private Orafile() { }

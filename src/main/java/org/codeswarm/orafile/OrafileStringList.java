@@ -2,6 +2,9 @@ package org.codeswarm.orafile;
 
 import java.util.List;
 
+/**
+ * A val whose value is a list of strings.
+ */
 public class OrafileStringList extends OrafileVal {
 
     final List<String> list;

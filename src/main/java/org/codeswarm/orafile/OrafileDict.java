@@ -2,13 +2,26 @@ package org.codeswarm.orafile;
 
 import java.util.*;
 
+/**
+ * A list of {@link OrafileDef}s.
+ *
+ * <p>The list is accessible via {@link #asList()}.
+ * For convenience, this data is also represented as a multimap
+ * (see {@link #get(String)}).</p>
+ */
 public class OrafileDict extends OrafileVal {
 
     final Map<String, List<OrafileVal>> map = new HashMap<String, List<OrafileVal>>();
     final List<OrafileDef> list = new ArrayList<OrafileDef>();
 
+    /**
+     * Construct an empty dict.
+     */
     public OrafileDict() {}
 
+    /**
+     * Construct a dict with a single entry.
+     */
     public OrafileDict(OrafileDef def) {
         if (def == null) {
             throw new NullPointerException();
@@ -16,6 +29,9 @@ public class OrafileDict extends OrafileVal {
         add(def);
     }
 
+    /**
+     * Append {@code def} to the end of this list.
+     */
     public void add(OrafileDef def) {
         String name = def.getName();
         {
@@ -24,25 +40,36 @@ public class OrafileDict extends OrafileVal {
                 list = new ArrayList<OrafileVal>();
                 map.put(name, list);
             }
-            list.add(def.getParam());
+            list.add(def.getVal());
         }
         list.add(def);
     }
 
+    /**
+     * Copy all defs from {@code dict} onto the end of this list.
+     */
     public void add(OrafileDict dict) {
         for (OrafileDef def : dict.list) {
             add(def);
         }
     }
 
+    /**
+     * @return An unmodifiable view of the def list.
+     */
     public List<OrafileDef> asList() {
         return Collections.unmodifiableList(list);
     }
 
+    /**
+     * @return A val for each def whose name is {@code name}, in the
+     * same in which they appear in this list. If no defs exist having
+     * the specified name, the list will be empty.
+     */
     public List<OrafileVal> get(String name) {
-        List<OrafileVal> params = map.get(name.toUpperCase());
-        if (params != null) {
-            return params;
+        List<OrafileVal> vals = map.get(name.toUpperCase());
+        if (vals != null) {
+            return vals;
         } else {
             return Arrays.asList(new OrafileVal[]{});
         }
@@ -52,7 +79,7 @@ public class OrafileDict extends OrafileVal {
         StringBuilder sb = new StringBuilder();
         for (OrafileDef def : list) {
             sb.append(def.getName());
-            String v = def.getParam().toString();
+            String v = def.getVal().toString();
             if (v.contains("\n")) {
                 for (String line : v.split("\n")) {
                     sb.append("\n  ").append(line);
@@ -76,6 +103,9 @@ public class OrafileDict extends OrafileVal {
         return list.hashCode();
     }
 
+    /**
+     * @return {@code this}
+     */
     public OrafileDict asNamedParamList() {
         return this;
     }

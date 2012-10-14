@@ -40,14 +40,14 @@ public abstract class OrafileVal {
 
         List<List<OrafileVal>> retval = new ArrayList<List<OrafileVal>>();
         for (OrafileDef def : stack.peek().getNamedParams()) {
-            OrafileVal param = def.getParam();
+            OrafileVal val = def.getVal();
             if (def.getName().equalsIgnoreCase(keyword)) {
                 ArrayList<OrafileVal> path = new ArrayList<OrafileVal>();
-                path.add(param);
+                path.add(val);
                 path.addAll(stack);
                 retval.add(path);
             } else {
-                stack.push(param);
+                stack.push(val);
                 retval.addAll(findContextually(keyword, stack));
                 stack.pop();
             }
@@ -59,11 +59,11 @@ public abstract class OrafileVal {
 
         List<OrafileVal> retval = new ArrayList<OrafileVal>();
         for (OrafileDef def : getNamedParams()) {
-            OrafileVal param = def.getParam();
+            OrafileVal val = def.getVal();
             if (def.getName().equalsIgnoreCase(keyword)) {
-                retval.add(param);
+                retval.add(val);
             } else {
-                retval.addAll(param.find(keyword));
+                retval.addAll(val.find(keyword));
             }
         }
         return retval;
@@ -71,8 +71,8 @@ public abstract class OrafileVal {
 
     public String findOneString(String keyword) {
 
-        for (OrafileVal param : find(keyword)) {
-            String value = param.asString();
+        for (OrafileVal val : find(keyword)) {
+            String value = val.asString();
             if (value != null) {
                 return value;
             }
@@ -108,9 +108,9 @@ public abstract class OrafileVal {
         paths: for (List<OrafileVal> path : findContextually(keyword)) {
             Map<String, String> values = new HashMap<String, String>();
             Set<String> attrsRemaining = new HashSet<String>(attrs);
-            for (OrafileVal param : path) {
+            for (OrafileVal val : path) {
                 for (String attr : attrsRemaining) {
-                    String value = param.findOneString(attr);
+                    String value = val.findOneString(attr);
                     if (value != null) {
                         values.put(attr, value);
                     }

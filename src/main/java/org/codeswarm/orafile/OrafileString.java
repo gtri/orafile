@@ -1,5 +1,8 @@
 package org.codeswarm.orafile;
 
+/**
+ * A val whose value is a string.
+ */
 public class OrafileString extends OrafileVal {
 
     final String string;

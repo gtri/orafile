@@ -5,7 +5,7 @@
 
   <groupId>org.codeswarm</groupId>
   <artifactId>orafile</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
 
   <name>orafile</name>
   <description>Java for dealing with Oracle SQL*Net .ora files</description>

@@ -55,3 +55,18 @@ public class OrafileDemo {
 
 }
 ```
+
+Download
+--------
+
+Orafile is available from Maven Central.
+The latest version is 1.0.
+
+```xml
+<dependency>
+  <groupId>org.codeswarm</groupId>
+  <artifactId>orafile</artifactId>
+  <version>1.0</version>
+</dependency>
+```
+

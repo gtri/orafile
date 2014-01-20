@@ -87,3 +87,9 @@ The latest version is 1.1.
   <version>1.1</version>
 </dependency>
 ```
+
+Release history
+---------------
+
+* 1.0 - Initial release
+* 1.1 - Add rendering feature (#1)

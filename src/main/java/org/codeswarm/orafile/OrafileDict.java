@@ -11,7 +11,9 @@ import java.util.*;
  */
 public class OrafileDict extends OrafileVal {
 
-    final Map<String, List<OrafileVal>> map = new HashMap<String, List<OrafileVal>>();
+    final Map<CaseInsensitiveString, List<OrafileVal>> map =
+        new HashMap<CaseInsensitiveString, List<OrafileVal>>();
+
     final List<OrafileDef> list = new ArrayList<OrafileDef>();
 
     /**
@@ -33,7 +35,7 @@ public class OrafileDict extends OrafileVal {
      * Append {@code def} to the end of this list.
      */
     public void add(OrafileDef def) {
-        String name = def.getName();
+        CaseInsensitiveString name = new CaseInsensitiveString(def.getName());
         {
             List<OrafileVal> list = map.get(name);
             if (list == null) {
@@ -67,7 +69,7 @@ public class OrafileDict extends OrafileVal {
      * the specified name, the list will be empty.
      */
     public List<OrafileVal> get(String name) {
-        List<OrafileVal> vals = map.get(name.toUpperCase());
+        List<OrafileVal> vals = map.get(new CaseInsensitiveString(name));
         if (vals != null) {
             return vals;
         } else {

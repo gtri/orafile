@@ -3,7 +3,7 @@ import java.util.*;
 
 public class OrafileDemo {
 
-    public static void main(String[] args) throws org.antlr.runtime.RecognitionException {
+    public static void main(String[] args) throws Exception {
 
         // The sort of thing you might find in tnsnames.ora
         String tnsFileContent = "TheApplication =\n" +
@@ -42,6 +42,24 @@ public class OrafileDemo {
         [{port=1521, sid=banana, host=app-server}, {port=1522, sid=banana, host=app-server}]
         */
 
+        System.out.println(new OrafileRenderer().renderFile(tns)); /* Output:
+
+        TheApplication =
+          (ADDRESS =
+            (PROTOCOL = TCP)
+            (HOST = app-server)
+            (PORT = 1521)
+          )
+          (ADDRESS =
+            (PROTOCOL = TCP)
+            (HOST = app-server)
+            (PORT = 1522)
+          )
+          (CONNECT_DATA =
+            (SID = banana)
+            (SERVER = dedicated)
+          )
+        */
     }
 
 }

@@ -115,13 +115,13 @@ public class OrafileTest {
         OrafileDict params = parse("net_service_name=\n" +
             "     (DESCRIPTION=\n" +
             "      (ADDRESS=one)\n" +
-            "      (ADDRESS=two)\n" +
+            "      (Address=two)\n" +
             "      (ADDRESS=three)))");
 
-        assertEquals(params, dict("NET_SERVICE_NAME", dict(
+        assertEquals(params, dict("net_service_name", dict(
             dict("DESCRIPTION", dict(
                 dict("ADDRESS", "one"),
-                dict("ADDRESS", "two"),
+                dict("Address", "two"),
                 dict("ADDRESS", "three")
             ))
         )));
@@ -177,6 +177,15 @@ public class OrafileTest {
         assertEquals(values.get(2).get("host"), "db-banana-master-2");
         assertEquals(values.get(2).get("port"), "1522");
         assertEquals(values.get(2).get("sid"), "banana2");
+    }
+
+    @Test
+    public void testRender() throws Exception {
+
+        String original = IOUtils.toString(getClass().getResourceAsStream("render-test.ora"));
+        OrafileDict parsed = parse(original);
+        String rendered = new OrafileRenderer().renderFile(parsed);
+        assertEquals(rendered, original);
     }
 
 }

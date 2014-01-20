@@ -77,7 +77,7 @@ quoted_string returns [String string]
     ;
 
 keyword returns [String string]
-    : unquoted_string { $string = $unquoted_string.string.toUpperCase(); }
+    : unquoted_string { $string = $unquoted_string.string; }
     ;
 
 str returns [String string]

@@ -92,4 +92,4 @@ Release history
 ---------------
 
 * 1.0 - Initial release
-* 1.1 - Add rendering feature (#1)
+* 1.1 - Add rendering feature (Issue #1)

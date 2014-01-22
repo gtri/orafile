@@ -35,7 +35,7 @@ public class OrafileRenderer {
             renderDef(writer, def, Parens.No, "");
 
             if (defs.hasNext()) {
-                writer.append(System.lineSeparator());
+                writer.append("\n");
             }
         }
     }

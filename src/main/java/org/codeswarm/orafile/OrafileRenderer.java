@@ -3,9 +3,31 @@ package org.codeswarm.orafile;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 
 public class OrafileRenderer {
+
+    final boolean sortByKey;
+
+    public OrafileRenderer() {
+        sortByKey = false;
+    }
+
+    OrafileRenderer(boolean sortByKey) {
+        this.sortByKey = sortByKey;
+    }
+
+    /**
+     * @param sortByKey True to sort entries by key. False to preserve original ordering.
+     * @return A new {@link OrafileRenderer}.
+     */
+    public OrafileRenderer sortByKey(boolean sortByKey) {
+        return new OrafileRenderer(sortByKey);
+    }
 
     private enum Parens {
 
@@ -27,7 +49,7 @@ public class OrafileRenderer {
     }
 
     public void renderFile(OrafileDict dict, Writer writer) throws IOException {
-        Iterator<OrafileDef> defs = dict.list.iterator();
+        Iterator<OrafileDef> defs = defs(dict).iterator();
         while (defs.hasNext()) {
 
             OrafileDef def = defs.next();
@@ -89,11 +111,27 @@ public class OrafileRenderer {
             writer.append(indent);
             if (parens.yes()) writer.append("(");
             writer.append(def.getName()).append(" =\n");
-            for (OrafileDef nextDef : dict.list) {
+            for (OrafileDef nextDef : defs(dict)) {
                 renderDef(writer, nextDef, Parens.Yes, nextIndent);
             }
 
             if (parens.yes()) writer.append(indent).append(")\n");
         }
     }
+
+    List<OrafileDef> defs(OrafileDict dict) {
+
+        if (!sortByKey) return dict.list;
+
+        List<OrafileDef> defs = new ArrayList<OrafileDef>(dict.list);
+        Collections.sort(defs, DEF_KEY_COMPARATOR);
+        return defs;
+    }
+
+    static final Comparator<OrafileDef> DEF_KEY_COMPARATOR = new Comparator<OrafileDef>() {
+        @Override
+        public int compare(OrafileDef a, OrafileDef b) {
+            return a.getName().compareTo(b.getName());
+        }
+    };
 }

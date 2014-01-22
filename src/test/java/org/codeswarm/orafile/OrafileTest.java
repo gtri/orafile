@@ -188,4 +188,17 @@ public class OrafileTest {
         assertEquals(rendered, original);
     }
 
+    @Test
+    public void testRenderSorted() throws Exception {
+
+        String original = IOUtils.toString(getClass().getResourceAsStream("render-test.ora"));
+
+        OrafileDict parsed = parse(original);
+        String rendered = new OrafileRenderer().sortByKey(true).renderFile(parsed);
+
+        String withSortedKeys =
+            IOUtils.toString(getClass().getResourceAsStream("render-test-with-sorted-keys.ora"));
+        assertEquals(rendered, withSortedKeys);
+    }
+
 }

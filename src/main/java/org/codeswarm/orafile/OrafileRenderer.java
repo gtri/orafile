@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class OrafileRenderer {
 
@@ -78,10 +79,7 @@ public class OrafileRenderer {
             writer.append(indent);
             if (parens.yes()) writer.append("(");
             writer.append(def.getName()).append(" = ");
-            boolean quote = stringVal.isEmpty() || stringVal.contains(" ");
-            if (quote) writer.append("\"");
-            writer.append(stringVal);
-            if (quote) writer.append("\"");
+            renderString(writer, stringVal);
             if (parens.yes()) writer.append(")\n");
 
         } else if (val instanceof OrafileStringList) {
@@ -96,11 +94,8 @@ public class OrafileRenderer {
 
                 String stringVal = stringVals.next();
 
-                boolean quote = stringVal.isEmpty() || stringVal.contains(" ");
                 writer.append(nextIndent);
-                if (quote) writer.append("\"");
-                writer.append(stringVal);
-                if (quote) writer.append("\"");
+                renderString(writer, stringVal);
                 if (stringVals.hasNext()) writer.append(",");
                 writer.append("\n");
             }
@@ -119,6 +114,21 @@ public class OrafileRenderer {
             }
 
             if (parens.yes()) writer.append(indent).append(")\n");
+        }
+    }
+
+    static final Pattern SAFE_STRING =
+        Pattern.compile("^[A-Za-z0-9\\Q<>/.:;-_$+*&!%?@\\E]+$");
+
+    void renderString(Writer writer, String string) throws IOException {
+
+        if (SAFE_STRING.matcher(string).matches()) {
+            writer.append(string);
+        } else {
+            String escaped = string
+                .replaceAll("\\\\", "\\\\\\\\")
+                .replaceAll("\"", "\\\\\"");
+            writer.append("\"").append(escaped).append("\"");
         }
     }
 

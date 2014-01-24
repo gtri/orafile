@@ -6,7 +6,7 @@ WENT =
         (LAY = (
           KNOWLEDGE,
           "",
-          SINGLE,
+          "SINGLE(S)",
           "RESULT RIVER"
         ))
       )
@@ -17,11 +17,11 @@ STUDENT =
   (FALL =
     (VALUES =
       (FEDERAL = Have)
-      (STAFF = "VOICE STORY")
+      (STAFF = "VOICE \"OF\" STORY")
       (MEET = 42)
     )
     (BETTER =
       (WAR = "")
-      (HALF = care)
+      (HALF = "ca\\re")
     )
   )

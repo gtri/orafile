@@ -75,7 +75,7 @@ public class OrafileRenderer {
             writer.append(indent);
             if (parens.yes()) writer.append("(");
             writer.append(def.getName()).append(" = ");
-            boolean quote = stringVal.contains(" ");
+            boolean quote = stringVal.isEmpty() || stringVal.contains(" ");
             if (quote) writer.append("\"");
             writer.append(stringVal);
             if (quote) writer.append("\"");
@@ -93,7 +93,7 @@ public class OrafileRenderer {
 
                 String stringVal = stringVals.next();
 
-                boolean quote = stringVal.contains(" ");
+                boolean quote = stringVal.isEmpty() || stringVal.contains(" ");
                 writer.append(nextIndent);
                 if (quote) writer.append("\"");
                 writer.append(stringVal);

@@ -5,6 +5,7 @@ WENT =
         (increased = NOT)
         (LAY = (
           KNOWLEDGE,
+          "",
           SINGLE,
           "RESULT RIVER"
         ))
@@ -20,7 +21,7 @@ STUDENT =
       (MEET = 42)
     )
     (BETTER =
-      (WAR = FARM)
+      (WAR = "")
       (HALF = care)
     )
   )

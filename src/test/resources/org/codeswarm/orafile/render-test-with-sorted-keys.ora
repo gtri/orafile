@@ -2,7 +2,7 @@ STUDENT =
   (FALL =
     (BETTER =
       (HALF = care)
-      (WAR = FARM)
+      (WAR = "")
     )
     (VALUES =
       (FEDERAL = Have)
@@ -17,6 +17,7 @@ WENT =
       (FEET =
         (LAY = (
           KNOWLEDGE,
+          "",
           SINGLE,
           "RESULT RIVER"
         ))

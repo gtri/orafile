@@ -81,7 +81,7 @@ Orafile is available from Maven Central.
 
 ```xml
 <dependency>
-  <groupId>org.codeswarm</groupId>
+  <groupId>edu.gatech.gtri.orafile</groupId>
   <artifactId>orafile</artifactId>
   <version>2.0</version>
 </dependency>

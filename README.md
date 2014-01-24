@@ -86,12 +86,3 @@ Orafile is available from Maven Central.
   <version>1.1.1</version>
 </dependency>
 ```
-
-Release history
----------------
-
-* 1.0 - Initial release
-* 1.1 - [Add rendering feature](https://github.com/codeswarm/orafile/issues/1)
-* 1.1.1 - [Java 6 compatibility](https://github.com/codeswarm/orafile/issues/2),
-          [quote empty strings](https://github.com/codeswarm/orafile/issues/4),
-          [fix string escaping](https://github.com/codeswarm/orafile/issues/9)

@@ -83,6 +83,6 @@ Orafile is available from Maven Central.
 <dependency>
   <groupId>org.codeswarm</groupId>
   <artifactId>orafile</artifactId>
-  <version>1.1.1</version>
+  <version>2.0</version>
 </dependency>
 ```

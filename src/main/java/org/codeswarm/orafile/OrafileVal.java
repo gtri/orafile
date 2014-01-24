@@ -36,7 +36,8 @@ public abstract class OrafileVal {
         return findContextually(keyword, stack);
     }
 
-    static List<List<OrafileVal>> findContextually(String keyword, Deque<OrafileVal> stack) {
+    static List<List<OrafileVal>> findContextually(
+            String keyword, Deque<OrafileVal> stack) {
 
         List<List<OrafileVal>> retval = new ArrayList<List<OrafileVal>>();
         for (OrafileDef def : stack.peek().getNamedParams()) {
@@ -103,7 +104,8 @@ public abstract class OrafileVal {
     public List<Map<String, String>> findParamAttrs(
             String keyword, List<String> attrs) {
 
-        List<Map<String, String>> results = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> results =
+            new ArrayList<Map<String, String>>();
 
         paths: for (List<OrafileVal> path : findContextually(keyword)) {
             Map<String, String> values = new HashMap<String, String>();

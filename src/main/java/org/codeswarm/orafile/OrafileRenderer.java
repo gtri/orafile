@@ -22,7 +22,8 @@ public class OrafileRenderer {
     }
 
     /**
-     * @param sortByKey True to sort entries by key. False to preserve original ordering.
+     * @param sortByKey True to sort entries by key. False to preserve
+     *  original ordering.
      * @return A new {@link OrafileRenderer}.
      */
     public OrafileRenderer sortByKey(boolean sortByKey) {
@@ -48,7 +49,8 @@ public class OrafileRenderer {
         return writer.toString();
     }
 
-    public void renderFile(OrafileDict dict, Writer writer) throws IOException {
+    public void renderFile(OrafileDict dict, Writer writer)
+            throws IOException {
         Iterator<OrafileDef> defs = defs(dict).iterator();
         while (defs.hasNext()) {
 
@@ -62,7 +64,8 @@ public class OrafileRenderer {
         }
     }
 
-    void renderDef(Writer writer, OrafileDef def, Parens parens, String indent) throws IOException {
+    void renderDef(Writer writer, OrafileDef def, Parens parens,
+            String indent) throws IOException {
 
         String nextIndent = indent + "  ";
 
@@ -128,7 +131,8 @@ public class OrafileRenderer {
         return defs;
     }
 
-    static final Comparator<OrafileDef> DEF_KEY_COMPARATOR = new Comparator<OrafileDef>() {
+    static final Comparator<OrafileDef> DEF_KEY_COMPARATOR =
+            new Comparator<OrafileDef>() {
         @Override
         public int compare(OrafileDef a, OrafileDef b) {
             return a.getName().compareTo(b.getName());

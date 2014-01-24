@@ -66,7 +66,8 @@ public final class Orafile {
         return new OrafileDef(name, val);
     }
 
-    public static OrafileDict parse(String fileContent) throws RecognitionException {
+    public static OrafileDict parse(String fileContent)
+            throws RecognitionException {
 
         ANTLRStringStream stringStream = new ANTLRStringStream(fileContent);
         OrafileLexer lexer = new OrafileLexer(stringStream);

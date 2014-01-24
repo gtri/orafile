@@ -11,7 +11,7 @@
 
   <groupId>edu.gatech.gtri.orafile</groupId>
   <artifactId>orafile</artifactId>
-  <version>1.1.2</version>
+  <version>1.1.3-SNAPSHOT</version>
 
   <name>orafile</name>
   <description>Java for dealing with Oracle SQL*Net .ora files</description>

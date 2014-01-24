@@ -7,7 +7,7 @@ Example usage
 -------------
 
 ```java
-import org.codeswarm.orafile.*;
+import edu.gatech.gtri.orafile.*;
 import java.util.*;
 
 public class OrafileDemo {

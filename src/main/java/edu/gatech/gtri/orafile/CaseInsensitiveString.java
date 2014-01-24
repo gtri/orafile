@@ -1,4 +1,4 @@
-package org.codeswarm.orafile;
+package edu.gatech.gtri.orafile;
 
 final class CaseInsensitiveString {
 

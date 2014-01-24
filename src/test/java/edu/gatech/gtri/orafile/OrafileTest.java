@@ -1,4 +1,4 @@
-package org.codeswarm.orafile;
+package edu.gatech.gtri.orafile;
 
 import org.apache.commons.io.IOUtils;
 import org.testng.annotations.Test;
@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static edu.gatech.gtri.orafile.Orafile.*;
 import static java.util.Arrays.asList;
-import static org.codeswarm.orafile.Orafile.*;
 import static org.testng.Assert.assertEquals;
 
 public class OrafileTest {

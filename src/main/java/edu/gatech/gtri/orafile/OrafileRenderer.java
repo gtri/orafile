@@ -1,13 +1,9 @@
-package org.codeswarm.orafile;
+package edu.gatech.gtri.orafile;
 
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class OrafileRenderer {

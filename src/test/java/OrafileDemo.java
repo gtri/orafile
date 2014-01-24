@@ -1,5 +1,11 @@
-import org.codeswarm.orafile.*;
-import java.util.*;
+import edu.gatech.gtri.orafile.Orafile;
+import edu.gatech.gtri.orafile.OrafileDict;
+import edu.gatech.gtri.orafile.OrafileRenderer;
+import edu.gatech.gtri.orafile.OrafileVal;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 public class OrafileDemo {
 

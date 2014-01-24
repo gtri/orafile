@@ -27,11 +27,11 @@ options {
 }
 
 @parser::header {
-    package org.codeswarm.orafile;
+    package edu.gatech.gtri.orafile;
 }
 
 @lexer::header {
-    package org.codeswarm.orafile;
+    package edu.gatech.gtri.orafile;
 }
 
 @parser::members {

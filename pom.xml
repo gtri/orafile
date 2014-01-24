@@ -9,18 +9,18 @@
     <version>7</version>
   </parent>
 
-  <groupId>org.codeswarm</groupId>
+  <groupId>edu.gatech.gtri.orafile</groupId>
   <artifactId>orafile</artifactId>
   <version>1.2-SNAPSHOT</version>
 
   <name>orafile</name>
   <description>Java for dealing with Oracle SQL*Net .ora files</description>
-  <url>https://github.com/codeswarm/orafile</url>
+  <url>https://github.com/gtri/orafile</url>
 
   <scm>
-    <url>https://github.com/codeswarm/orafile</url>
-    <connection>scm:git:git://github.com/codeswarm/orafile.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/codeswarm/orafile.git</developerConnection>
+    <url>https://github.com/gtri/orafile</url>
+    <connection>scm:git:git://github.com/gtri/orafile.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/gtri/orafile.git</developerConnection>
   </scm>
 
   <developers>
@@ -32,6 +32,8 @@
   </developers>
 
   <contributors>
+
+    <!-- Author of the original ANTLR grammar. -->
     <contributor>
       <name>Nathaniel Harward</name>
       <email>nharward@gmail.com</email>
@@ -39,6 +41,7 @@
         <role>developer</role>
       </roles>
     </contributor>
+
   </contributors>
 
   <licenses>
